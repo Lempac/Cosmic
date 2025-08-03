@@ -1,16 +1,19 @@
 {
-    "fmt": {
-        "semiColons": true,
-        "options": {
-
-        }
-    },
-    "lint": {
-        "rules": {
-            "exclude": ["no-unused-vars"]
-        }
-    },
-    "tasks": {
-        "run": "deno run --allow-read --allow-write src/Shell.ts"
+  "fmt": {
+    "semiColons": true
+  },
+  "compilerOptions": {
+    "erasableSyntaxOnly": true,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true
+  },
+  "lint": {
+    "rules": {
+      "exclude": ["no-unused-vars"]
     }
+  },
+  "tasks": {
+    "run": "deno run --allow-read --allow-write src/Shell.ts"
+  }
 }
