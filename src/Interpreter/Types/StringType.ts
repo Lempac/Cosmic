@@ -4,21 +4,24 @@ import { PositionInfo } from "../PositionInfo.ts";
 import { Type } from "../Type.ts";
 
 export class StringType extends Type {
-    name = "String";
-    value: string;
+  value: string;
 
-    constructor(info: PositionInfo, value: string) {
-        super(info);
-        this.value = value;
+  constructor(info: PositionInfo, value: string) {
+    super(info);
+    this.value = value;
+  }
+
+  override add(rhs: Type) {
+    const info = new PositionInfo(this.info.start, rhs.info.end);
+
+    if (rhs instanceof StringType) {
+      return Ok(new StringType(info, this.value + rhs.value));
     }
 
-    add(rhs: Type): Result<unknown, RuntimeError> {
-        const info = new PositionInfo(this.info.start, rhs.info.end);
-
-        if (rhs.name == "String") {
-            return Ok(new StringType(info, this.value + (rhs as StringType).value))    
-        }
-        
-        return this.rhsNotImplemented(rhs, "+");
-    }
+    return this.rhsNotImplemented(rhs, "+");
+  }
+  
+  override toString() {
+    return "StringType" as const;
+  }
 }

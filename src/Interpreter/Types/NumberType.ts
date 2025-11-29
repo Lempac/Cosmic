@@ -5,31 +5,34 @@ import { PositionInfo } from "../PositionInfo.ts";
 import { Type } from "../Type.ts";
 
 export class NumberType extends Type {
-    name = "Number";
-    value: number;
+  value: number;
 
-    constructor(info: PositionInfo, value: number) {
-        super(info);
-        this.value = value;
+  constructor(info: PositionInfo, value: number) {
+    super(info);
+    this.value = value;
+  }
+
+  override add(rhs: Type) {
+    const info = new PositionInfo(this.info.start, rhs.info.end);
+
+    if (rhs instanceof NumberType) {
+      return Ok(new NumberType(info, this.value + rhs.value));
     }
 
-    add(rhs: Type): Result<unknown, RuntimeError> {
-        const info = new PositionInfo(this.info.start, rhs.info.end);
+    return this.rhsNotImplemented(rhs, "+");
+  }
 
-        if (rhs.name == "Number") {
-            return Ok(new NumberType(info, this.value + (rhs as NumberType).value))    
-        }
-        
-        return this.rhsNotImplemented(rhs, "+");
+  override sub(rhs: Type) {
+    const info = new PositionInfo(this.info.start, rhs.info.end);
+
+    if (rhs instanceof NumberType) {
+      return Ok(new NumberType(info, this.value - rhs.value));
     }
 
-    sub(rhs: Type): Result<unknown, RuntimeError> {
-        const info = new PositionInfo(this.info.start, rhs.info.end);
-
-        if (rhs.name == "Number") {
-            return Ok(new NumberType(info, this.value - (rhs as NumberType).value))    
-        }
-        
-        return this.rhsNotImplemented(rhs, "-");
-    }
+    return this.rhsNotImplemented(rhs, "-");
+  }
+  
+  override toString() {
+    return "NumberType" as const;
+  }
 }
