@@ -20,7 +20,7 @@ export class StringType extends Type {
 
     return this.rhsNotImplemented(rhs, "+");
   }
-  
+
   override toString() {
     return "StringType" as const;
   }

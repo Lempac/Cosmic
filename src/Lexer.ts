@@ -40,7 +40,6 @@ export function parseToTokens(
     let match = null;
 
     for (let i = 0; i < tokenTypeKeys.length; i++) {
-      //@ts-ignore TS Nonsense
       const regex = tokenTypes[tokenTypeKeys[i]];
 
       // Use the regular expression to match against the input at the current position
@@ -63,7 +62,6 @@ export function parseToTokens(
 
         // Add the matched token to the tokens array
         tokens.push({
-          //@ts-ignore This should be fine in TS
           type: tokenTypeKeys[i],
           value,
           start: position,

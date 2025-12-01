@@ -64,7 +64,7 @@ export abstract class Type {
     return this.operatorNotImplemented("<");
   }
 
-  lte(rhs: Type){
+  lte(rhs: Type) {
     return this.operatorNotImplemented("<=");
   }
 
@@ -79,7 +79,7 @@ export abstract class Type {
   not(operator: PositionInfo) {
     return this.operatorNotImplemented("!");
   }
-  
+
   toString() {
     return "Type";
   }

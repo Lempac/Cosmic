@@ -10,5 +10,8 @@
     ".github": true,
     ".vscode": true,
     "deno.lock": true
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
   }
 }

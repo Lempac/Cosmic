@@ -1,0 +1,17 @@
+{
+  "fmt": {
+    "semiColons": true
+  },
+  "compilerOptions": {
+    "erasableSyntaxOnly": true,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true
+  },
+  "tasks": {
+    "run": "deno run --allow-read --allow-write src/Shell.ts"
+  },
+  "imports": {
+    "@std/fmt": "jsr:@std/fmt@^1.0.8"
+  }
+}

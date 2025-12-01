@@ -111,12 +111,9 @@ export function tokensToAST(
     return res;
   }
 
-  // deno-lint-ignore no-explicit-any
   const replacer = excludePositionsInASTFile
-    ? (key: unknown, value: unknown) => {
-      if (["start", "end"].includes(key)) return undefined;
-      return value;
-    }
+    ? (key: string, value: unknown) =>
+      ["start", "end"].includes(key) ? undefined : value
     : undefined;
 
   if (writeASTtoFile) {

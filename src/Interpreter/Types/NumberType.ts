@@ -31,7 +31,7 @@ export class NumberType extends Type {
 
     return this.rhsNotImplemented(rhs, "-");
   }
-  
+
   override toString() {
     return "NumberType" as const;
   }

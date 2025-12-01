@@ -1,4 +1,4 @@
-import { bold, dim, magenta, red } from "jsr:@std/fmt/colors";
+import { bold, dim, magenta, red } from "@std/fmt/colors";
 import { CosmicError, RuntimeError } from "./Common/GenericError.ts";
 import { parseToTokens } from "./Lexer.ts";
 import { tokensToAST } from "./Parser.ts";
@@ -49,7 +49,7 @@ const tokens = parseToTokens(input, true);
 if (!tokens.isOk) {
   const errors = tokens.unwrapErr();
 
-  errors.forEach((err) => {
+  errors?.forEach((err) => {
     reportIssue(err.type, err.reason, err.start, err.end);
   });
 
@@ -59,8 +59,10 @@ if (!tokens.isOk) {
 const ast = tokensToAST(tokens.unwrap(), true, false, true);
 if (!ast.isOk) {
   const error = ast.unwrapErr();
-  reportIssue(error.type, error.reason, error.start, error.end);
-  console.log("critical:", error.isErrorCritical);
+  if (error) {
+    console.log("critical:", error.isErrorCritical);
+    reportIssue(error.type, error.reason, error.start, error.end);
+  }
 }
 
 const context = new Context();
@@ -68,5 +70,5 @@ const interpretedRes = interpret(ast.unwrap(), context);
 
 if (!interpretedRes.isOk) {
   const error = interpretedRes.unwrapErr();
-  reportIssue(error.type, error.reason, error.start, error.end);
+  if (error) reportIssue(error.type, error.reason, error.start, error.end);
 }

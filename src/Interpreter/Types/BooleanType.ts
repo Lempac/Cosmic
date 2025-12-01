@@ -15,7 +15,7 @@ export class BooleanType extends Type {
     const info = new PositionInfo(operator.start, this.info.end);
     return Ok(new BooleanType(info, !this.value));
   }
-  
+
   override toString() {
     return "BooleanType" as const;
   }
